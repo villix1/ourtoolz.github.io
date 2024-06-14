@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O U R T O O L Z</title>
+    <style>
+        @font-face {
+            font-family: 'AdultSwim';
+            src: url('Adult-Swim-Font.ttf') format('truetype');
+        }
+        body {
+            margin: 0;
+            font-family: 'AdultSwim', Arial, sans-serif;
+            background-color: #1f1f1f;
+            color: #fff;
+            scroll-behavior: smooth; /* Add smooth scrolling behavior */
+        }
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+        nav .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+        nav ul li {
+            margin: 0 10px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1em;
+            padding: 5px 10px;
+            transition: background 0.3s;
+        }
+        nav ul li a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+        header {
+            position: relative;
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 50px;
+            box-sizing: border-box;
+            background: url('https://media.discordapp.net/attachments/1246300204911820811/1249169584733556776/imageee.png?ex=666d9395&is=666c4215&hm=b80326d030a5cb2bb212483351d35a3d8a1e07115e73b87fc1bdf1320f5c0971&=&format=webp&quality=lossless&width=960&height=229') no-repeat center center/cover;
+            margin-top: 60px; /* Added margin to account for the fixed nav bar */
+        }
+        header .content {
+            color: #fff;
+            text-shadow: 0 0 5px #d1c4e9;
+        }
+        header .content h1 {
+            font-size: 3em;
+            margin: 0;
+        }
+        header .content p {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+        .song-player {
+            display: flex;
+            align-items: center;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
+        .song-player button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin: 0 5px;
+        }
+        .song-player button img {
+            width: 24px;
+            height: 24px;
+        }
+        .song-player input[type="range"] {
+            width: 100px;
+            margin: 0 10px;
+            background: #000;
+        }
+        main {
+            background-color: #1f1f1f;
+            padding: 50px;
+            text-align: center;
+        }
+        .tool {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 80px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease, transform 1s ease;
+            min-height: 70vh;
+        }
+        .tool.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .tool img {
+            max-width: 40%;
+            animation: float 3s ease-in-out infinite;
+            transition: box-shadow 0.3s;
+        }
+        .tool img:hover {
+            box-shadow: 0 0 20px 5px #fff;
+        }
+        .tool .description {
+            max-width: 50%;
+            margin-left: 20px;
+            text-shadow: 0 0 5px #d1c4e9;
+            text-align: left;
+        }
+        .button-container {
+            margin-top: 10px;
+        }
+        .button-container button {
+            background-color: #7e57c2;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+        .about {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 50px 0;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            text-align: left;
+        }
+        .about img {
+            max-width: 40%;
+            margin-right: 20px;
+            border-radius: 10px;
+            animation: float 3s ease-in-out infinite; /* Add animation to the about image */
+        }
+        .about .text {
+            max-width: 50%;
+            text-shadow: 0 0 5px #d1c4e9;
+        }
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        .faq {
+            text-align: left;
+            margin-top: 50px;
+        }
+        .faq h2 {
+            text-shadow: 0 0 5px #d1c4e9;
+        }
+        .faq .question {
+            margin: 20px 0;
+        }
+        .faq .question h3 {
+            margin: 0;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .faq .question p {
+            display: none;
+            margin: 5px 0 0;
+        }
+        .faq .question h3:hover {
+            color: #7e57c2;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="logo">O U R T O O L Z</div>
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="https://discord.gg/C3XkEuJdDr" target="_blank">Support</a></li>
+    </ul>
+    <div class="song-player">
+        <button id="prev"><img src="https://discords.com/_next/image?url=https%3A%2F%2Fcdn.discordapp.com%2Femojis%2F882797938806505492.png%3Fv%3D1&w=64&q=75" alt="Prev"></button>
+        <button id="play"><img src="https://discords.com/_next/image?url=https%3A%2F%2Fcdn.discordapp.com%2Femojis%2F947356550417248326.png%3Fv%3D1&w=64&q=75" alt="Play"></button>
+        <button id="next"><img src="https://discords.com/_next/image?url=https%3A%2F%2Fcdn.discordapp.com%2Femojis%2F882797938806505492.png%3Fv%3D1&w=64&q=75" alt="Next"></button>
+        <input type="range" id="volume" min="0" max="100" value="50">
+    </div>
+</nav>
+
+<header id="home">
+    <div class="content">
+        <h1>[o u r  t o o l z]</h1>
+        <p>we love your saftey more than tittys.</p>
+    </div>
+</header>
+
+<main>
+    <section id="about" class="about">
+        <img src="https://media.discordapp.net/attachments/1239392075439411210/1249906363161772032/ourtoolzzz.png?ex=666d9ec3&is=666c4d43&hm=028a0b2a57f12857773795514b21a46a64cadec067ccfd615afce66419740a76&=&format=webp&quality=lossless&width=904&height=468" alt="Our Toolz">
+        <div class="text">
+            <h2>About O U R  T O O L Z</h2>
+            <p>
+                Welcome to O U R  T O O L Z, Your ultimate destination for top-notch, Python-based programs. Whether you're looking for server nukers or free Generators, we've got you covered. All our programs are meticulously developed to ensure they are 100% virus-free, providing you with safe and reliable technology to enhance your productivity. Explore our diverse range of offerings and find the perfect tool for your needs at O U R  T O O L Z.</p>
+        </div>
+    </section>
+
+    <section id="tools">
+        <section class="tool">
+            <img src="https://media.discordapp.net/attachments/1246300204911820811/1249294197857452055/llink1.png?ex=666d5ee3&is=666c0d63&hm=2f09cc725c60759b35f153c4185614ec7f19f0e0451f3457af821387a83468cc&=&format=webp&quality=lossless&width=895&height=468" alt="Tool Image">
+            <div class="description">
+                <h2>Zyprox</h2>
+                <p>Zyprox is the best python script of 2024 with awesome features such as Webhook spams, Token Nukers, Generators, Bot Nukers, IP Tools.</p>
+                <ul>
+                    <li>Webhook Spams, Spoofs, Tests</li>
+                    <li>Token Nuking</li>
+                    <li>Generators</li>
+                    <li>Server Nuking</li>
+                    <li>Send Packets To IP</li>
+                </ul>
+                <div class="button-container">
+                    <button onclick="location.href='https://discord.gg/C3XkEuJdDr'">Buy</button>
+                    <button onclick="location.href='https://discord.gg/C3XkEuJdDr'">Try Free</button>
+                </div>
+            </div>
+        </section>
+        <section id="tools">
+            <section class="tool">
+                <img src="https://media.discordapp.net/attachments/1246300204911820811/1249939570393481216/the_button.png?ex=666d14f0&is=666bc370&hm=8980f5234ba8b841bfe4bf730be7250d0eeb1aa1006569c2522ffd2b4a4052fa&=&format=webp&quality=lossless&width=895&height=468" alt="Tool Image">
+                <div class="description">
+                    <h2>The Red Button</h2>
+                    <p>The Red Button, is a executeable file that can display the info and nuke any discord account that you have the token of. You can purchase this for only $3 USD.</p>
+                    <ul>
+                        <li>Display Account Info</li>
+                        <li>Set Everything To Light Mode</li>
+                        <li>Blocks Everyone</li>
+                        <li>Leaves All Servers</li>
+                        <li>Deletes All Owned Servers</li>
+                        <li>Changes Language</li>
+                    </ul>
+                    <div class="button-container">
+                        <button onclick="location.href='https://discord.gg/C3XkEuJdDr'">Buy</button>
+                    </div>
+                </div>
+            </section>
+        <section class="tool">
+            <img src="https://media.discordapp.net/attachments/1246300204911820811/1250084672302616636/tiktok_tool.png?ex=6669a793&is=66685613&hm=671e87862b3a172ddb6fa507a7c163b33bec481c9b6fbdc11a8983ddedebb57a&=&format=webp&quality=lossless&width=918&height=478" alt="Tool Image">
+            <div class="description">
+                <h2>TikTok View Bot</h2>
+                <p>TikTok View Bot, is a free python executeable that using proxies to grant tiktok views.</p>
+                <ul>
+                    <li>Generates TikTok Views</li>
+                </ul>
+                <div class="button-container">
+                    <button onclick="location.href='https://discord.gg/C3XkEuJdDr'">Download</button>
+                </div>
+            </div>
+        </section>
+        <section id="tools">
+            <section class="tool">
+                <img src="https://media.discordapp.net/attachments/1239392075439411210/1251319537236836403/y2f.png?ex=666e25a2&is=666cd422&hm=3747fc3825b22c832abf3e18d3781984cafcb48a9473f611f03389b4514d49c0&=&format=webp&quality=lossless&width=906&height=468" alt="Tool Image">
+                <div class="description">
+                    <h2>Y2F (Youtube To File)</h2>
+                    <p>Y2F, is a program that lets you input a youtube link, and then it will export that video into a file (mp3 or mp4)</p>
+                    <ul>
+                        <li>Yt to mp3</li>
+                        <li>Yt to mp4</li>
+                    </ul>
+                    <div class="button-container">
+                        <button onclick="location.href='https://discord.gg/C3XkEuJdDr'">Download</button>
+                    </div>
+                </div>
+            </section>
+    </section>
+
+    <section id="faq" class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <div class="question">
+            <h3>What is Zyprox?</h3>
+            <p>Zyprox is a powerful Python script offering various features such as Webhook spams, Token Nukers, Generators, Bot Nukers, and IP Tools so YOU can be the scariest cunt online.</p>
+        </div>
+        <div class="question">
+            <h3>How do I purchase the programs?</h3>
+            <p>You can purchase/download any program listed by clicking the "Buy" or "Download" button which will redirect you to our Discord server which will contain everything.</p>
+        </div>
+        <div class="question">
+            <h3>Is there a free version of Zyprox?</h3>
+            <p>Yes, we offer a free version of Zyprox, Though it does not have all the features unlocked. Click the "Try Free" button to get started.</p>
+        </div>
+        <div class="question">
+            <h3>How do I get support?</h3>
+            <p>For support, you can visit our Discord server by clicking the "Support" button at the top of the page.</p>
+        </div>
+    </section>
+</main>
+
+<footer id="contact">
+    <p>&copy; 2024 O U R  T O O L Z All rights reserved.</p>
+</footer>
+
+<script>
+    const playButton = document.getElementById('play');
+    const nextButton = document.getElementById('next');
+    const prevButton = document.getElementById('prev');
+    const volumeControl = document.getElementById('volume');
+    const songTitle = document.getElementById('song-title');
+    const songAuthor = document.getElementById('song-author');
+
+    const songs = [
+        { src: 'song1.mp3', title: 'PLAYA SHIT w/$OUDIERE', author: 'NXXXXXS' },
+        { src: 'song2.mp3', title: 'Running Away (Time)', author: 'VANO 3000' },
+        { src: 'song3.mp3', title: 'The Message', author: 'ONEFOUR' }
+    ];
+    let currentSongIndex = 0;
+    const audio = new Audio(`songs/${songs[currentSongIndex].src}`);
+
+    playButton.addEventListener('click', () => {
+        if (audio.paused) {
+            audio.play();
+            playButton.firstChild.src = 'https://discords.com/_next/image?url=https%3A%2F%2Fcdn.discordapp.com%2Femojis%2F894613592383569980.png%3Fv%3D1&w=64&q=75';
+        } else {
+            audio.pause();
+            playButton.firstChild.src = 'https://discords.com/_next/image?url=https%3A%2F%2Fcdn.discordapp.com%2Femojis%2F947356550417248326.png%3Fv%3D1&w=64&q=75';
+        }
+    });
+
+    nextButton.addEventListener('click', () => {
+        currentSongIndex = (currentSongIndex + 1) % songs.length;
+        audio.src = `songs/${songs[currentSongIndex].src}`;
+        audio.play();
+        playButton.firstChild.src = 'https://discords.com/_next/image?url=https%3A%2F%2Fcdn.discordapp.com%2Femojis%2F894613592383569980.png%3Fv%3D1&w=64&q=75';
+    });
+
+    prevButton.addEventListener('click', () => {
+        currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+        audio.src = `songs/${songs[currentSongIndex].src}`;
+        audio.play();
+        playButton.firstChild.src = 'https://discords.com/_next/image?url=https%3A%2F%2Fcdn.discordapp.com%2Femojis%2F894613592383569980.png%3Fv%3D1&w=64&q=75';
+    });
+
+    volumeControl.addEventListener('input', () => {
+        audio.volume = volumeControl.value / 100;
+    });
+
+    // Fade-in and fade-out effect
+    const tools = document.querySelectorAll('.tool');
+
+    const fadeInOnScroll = () => {
+        tools.forEach(tool => {
+            const rect = tool.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom >= 0) {
+                tool.classList.add('visible');
+            } else {
+                tool.classList.remove('visible');
+            }
+        });
+    };
+
+    window.addEventListener('scroll', fadeInOnScroll);
+    fadeInOnScroll(); // Initial check in case elements are already in view
+
+    // FAQ section toggle
+    const faqQuestions = document.querySelectorAll('.faq .question h3');
+    faqQuestions.forEach(question => {
+        question.addEventListener('click', () => {
+            const answer = question.nextElementSibling;
+            if (answer.style.display === 'block') {
+                answer.style.display = 'none';
+            } else {
+                answer.style.display = 'block';
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

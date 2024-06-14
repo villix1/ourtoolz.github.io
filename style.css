@@ -1,0 +1,45 @@
+@font-face {
+    font-family: 'AdultSwimFont';
+    src: url('Adult-Swim-Font.ttf') format('truetype');
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'AdultSwimFont', sans-serif;
+    background-color: black; /* Set whole background to black */
+}
+
+#backgroundVideo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: black;
+    object-fit: cover;
+    display: none; /* Hide the video initially */
+}
+
+#container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    background-color: black; /* Ensure the container has a black background */
+}
+
+#clickableText {
+    font-size: 3rem; /* Adjust the size as needed */
+    color: white; /* Set text color to white for contrast */
+    cursor: pointer;
+    z-index: 1;
+    padding: 1rem; /* Add some padding for better appearance */
+    background-color: black; /* Set background color to black */
+}
